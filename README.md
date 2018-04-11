@@ -28,31 +28,31 @@
     xlwt (1.3.0)
 ##插件升级后的问题及解决
 1. 连接数据库
-    pip install pymsql
-    在mxonline/__init__.py中
-    import pymysql
+    pip install pymsql  
+    在mxonline/__init__.py中  
+    import pymysql  
     pymysql.install_as_MySQLdb()
 2. django2.0把from django.core.urlresolvers修改成了django.urls
 3. django2.0中需要给外键ForeignKey指定on_delete参数
     content_type = models.ForeignKey(ContentType,on_delete=models.CASCADE)
 4. django2.0 forms表单初始化只需要一个参数
-    报错
-    model = ModelChoiceField(label=_(u'Target Model'), widget=exwidgets.AdminSelectWidget)
-    File "D:\Envs\django-xadmin\lib\site-packages\xadmin-0.6.1-py3.6.egg\xadmin\views\dashboard.py", line 284, in __init__
-    forms.Field.__init__(self, required, widget, label, initial, help_text, *args, **kwargs)
-    TypeError: __init__() takes 1 positional argument but 6 were given
-    解决
-    forms.Field.__init__(self)
+    报错  
+    model = ModelChoiceField(label=_(u'Target Model'), widget=exwidgets.AdminSelectWidget)  
+    File "D:\Envs\django-xadmin\lib\site-packages\xadmin-0.6.1-py3.6.egg\xadmin\views\dashboard.py", line 284, in __init__  
+    forms.Field.__init__(self, required, widget, label, initial, help_text, *args, **kwargs)  
+    TypeError: __init__() takes 1 positional argument but 6 were given  
+    解决  
+    forms.Field.__init__(self)  
 5. 导入QUERY_TERMS报错
-    把
-    from django.db.models.sql.query import LOOKUP_SEP, QUERY_TERMS
-    改为
-    from django.db.models.sql.query import LOOKUP_SEP
-    from django.db.models.sql.constants import QUERY_TERMS
+    把  
+    from django.db.models.sql.query import LOOKUP_SEP, QUERY_TERMS  
+    改为  
+    from django.db.models.sql.query import LOOKUP_SEP  
+    from django.db.models.sql.constants import QUERY_TERMS  
 6. Settings缺少MIDDLEWARE_CLASSES属性，django2.0把MIDDLEWARE_ClASSES改成MIDDLEWARE
-    把
-    if settings.LANGUAGES and 'django.middleware.locale.LocaleMiddleware' in settings.MIDDLEWARE_ClASSES:
-    改为
+    把  
+    if settings.LANGUAGES and 'django.middleware.locale.LocaleMiddleware' in settings.MIDDLEWARE_ClASSES:  
+    改为  
     if settings.LANGUAGES and 'django.middleware.locale.LocaleMiddleware' in settings.MIDDLEWARE:
 7. Django导入xadmin提示No module named import_export.admin
     pip install django-import-export 
